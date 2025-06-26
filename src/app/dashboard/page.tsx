@@ -14,7 +14,8 @@ export default async function DashboardPage() {
 
   const userData = await db.user.findUniqueOrThrow({
     where: { id: session.user.id },
-    select: {//@ts-ignore
+ 
+    select: {
       uploadedFiles: {
         where: {
           uploaded: true,
@@ -39,17 +40,19 @@ export default async function DashboardPage() {
       },
     },
   });
-//@ts-ignore
+
+
   const formattedFiles = userData.uploadedFiles.map((file) => ({
     id: file.id,
     s3Key: file.s3Key,
-    filename: file.displayName ?? "Unkown filename",
+    filename: file.displayName ?? "Unknown filename",
     status: file.status,
     clipsCount: file._count.clips,
     createdAt: file.createdAt,
   }));
 
-  return (//@ts-ignore
+  return (
+
     <DashboardClient uploadedFiles={formattedFiles} clips={userData.clips} />
   );
 }

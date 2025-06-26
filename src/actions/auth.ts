@@ -35,8 +35,11 @@ export async function signUp(data: SignupFormValues): Promise<SignupResult> {
     await db.user.create({
       data: {
         email,
-        //@ts-ignore
-        password: hashedPassword,
+    
+  
+password: hashedPassword,
+
+
         // Remove stripeCustomerId for now
       },
     });

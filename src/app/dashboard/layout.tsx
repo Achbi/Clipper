@@ -20,13 +20,13 @@ export default async function DashboardLayout({
 
   const user = await db.user.findUniqueOrThrow({
     where: { id: session.user.id },
-    //@ts-ignore
+  
     select: { credits: true, email: true },
   });
 
   return (
     <div className="flex min-h-screen flex-col">
-      //@ts-ignore
+      
       <NavHeader credits={user.credits} email={user.email} />
       <main className="container mx-auto flex-1 py-6">{children}</main>
       <Toaster />

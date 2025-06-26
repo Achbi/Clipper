@@ -54,7 +54,7 @@ export const authConfig = {
         if (!user) {
           return null;
         }
-         //@ts-expect-error-error
+        
         const passwordMatch = await comparePasswords(password, user.password);
         if (!passwordMatch) return null;
 

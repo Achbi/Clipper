@@ -39,7 +39,8 @@ export async function generateUploadUrl(fileInfo: {
   });
 
   const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 600 });
-  //@ts-ignore
+ 
+
   const uploadedFileDbRecord = await db.uploadedFile.create({
     data: {
       userId: session.user.id,

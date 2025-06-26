@@ -9,9 +9,8 @@ import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 
 export async function processVideo(uploadedFileId: string) {
-  const uploadedVideo = await db.
-  //@ts-ignore
-  uploadedFile.findUniqueOrThrow({
+
+  const uploadedVideo = await db.uploadedFile.findUniqueOrThrow({
     where: {
       id: uploadedFileId,
     },
@@ -28,7 +27,7 @@ export async function processVideo(uploadedFileId: string) {
     name: "process-video-events",
     data: { uploadedFileId: uploadedVideo.id, userId: uploadedVideo.userId },
   });
-//@ts-ignore
+
   await db.uploadedFile.update({
     where: {
       id: uploadedFileId,
@@ -50,7 +49,7 @@ export async function getClipPlayUrl(
   }
 
   try {
-    //@ts-ignore
+    
     const clip = await db.clip.findUniqueOrThrow({
       where: {
         id: clipId,
@@ -76,7 +75,8 @@ export async function getClipPlayUrl(
     });
 
     return { succes: true, url: signedUrl };
-  } catch (error) {
+  } catch {
+    // removed unused variable `error`
     return { succes: false, error: "Failed to generate play URL." };
   }
 }
